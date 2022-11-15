@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+                               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <title>PNF</title>
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-111714927-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-111714927-1');
+        </script>
+    </head>
+    <body class="container" style="max-width:780px">
+
+        <!-- Title -->
+        <div>
+            <div class='row mt-5 mb-3'>
+                <div class='col text-center'>
+                    <p class="h2 font-weight-normal">Polynomial Neural Fields <br> for Subband Decomposition and Manipulation</p>
+                </div>
+            </div>
+
+            <!-- authors -->
+            <div class='row text-center h6 font-weight-bold pl-4 pr-4 mb-4'>
+                <a class="col-md-3 col-xs-6" href="http://www.guandaoyang.com"><span>Guandao Yang*</span></a>
+                <a class="col-md-3 col-xs-6" href="https://sagiebenaim.github.io/"><span>Sagie Benaim*</span></a>
+                <a class="col-md-3 col-xs-6" href="https://varunjampani.github.io/"><span>Varun Jampani</span></a>
+                <a class="col-md-3 col-xs-6" href="https://www.kylegenova.com/"><span>Kyle Genova</span></a>
+                <a class="col-md-4 col-xs-6" href="https://jonbarron.info/"><span>Jonathan T. Barron</span></a>
+                <a class="col-md-4 col-xs-6" href="https://www.cs.princeton.edu/~funk/"><span>Thomas Funkhouser</span></a>
+                <a class="col-md-4 col-xs-6" href="http://home.bharathh.info/"><span>Bharath Hariharan</span></a>
+                <a class="col-md-12 col-xs-6" href="https://www.belongielab.org/"><span>Serge Belongie</span></a>
+            </div>
+
+            <!-- affiliations -->
+            <div class='row mt-1 mt-2' >
+                <div class='col text-center'>
+                    <p class="h6 font-weight-light">
+                    <a class="ml-4" href="https://www.cornell.edu/"><span>Cornell University</span></a>
+                    <a class="mr-4 ml-4" href="https://tech.cornell.edu/"><span>University of Copenhagen</span></a>
+                    <a class="mr-4 ml-4" href="https://research.google/"><span>Google Research</span></a>
+                    </p>
+                </div>
+            </div>
+
+             <div class='row text-center h6 font-weight-light pl-4 pr-4 mb-4'>
+                <span class="col-md-12 col-xs-12" style="color:#007bff">*Equal contribution</span>
+            </div>
+
+			<div class='row justify-content-center'
+                 style="position: relative; width: 100%; height:100%; padding-bottom: 30%; margin-top:32px">
+                <img
+                    class="img-fluid rounded mx-auto d-block"
+                    src="assets/teaser.png" alt="Geometry processing with neural fields can be done with this pipeline."
+                    style="position:absolute; width:100%; top:0px; left:0px;"
+                    srcset="assets/teaser.png 1536w"
+                    sizes="(min-width: 768px) 1536px, 100vw"
+                >
+			</div>
+        </div>
+
+        <!-- Paper section -->
+        <div>
+            <hr>
+            <div class='row'>
+                <div class='col-md-3 col-sm-3 col-xs-12 text-center col-sm-3'>
+                    <div class="row mt-4">
+                        <a href="https://openreview.net/pdf?id=juE5ErmZB61"
+                           style="max-width:200px; margin-left:auto; margin-right:auto">
+                            <img src="assets/paper.jpg" alt="paper-snapshot" class="img-thumbnail"
+                                 width="80%" style="box-shadow: 10px 10px 5px grey;">
+                        </a>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col">
+                            <a class="h5" href="https://openreview.net/pdf?id=juE5ErmZB61"
+                               style="margin-right:10px">
+                                <span>[Paper]</span>
+                            </a>
+                            <a class="h5" href="https://github.com/stevenygd/PNF"
+                               style="margin-right:10px">
+                                <span>[Code]</span>
+                            </a>
+                            <a class="h5" href="assets/Bibtex.txt" target="_blank">
+                                <span>[Bibtex]</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class='col-md-9 col-sm-9 col-xs-12'>
+                    <p class='h4 font-weight-bold '>Abstract</p>
+                    <p style='line-height:1.2;'>Neural fields have emerged as a new paradigm for representing signals, thanks to
+their ability to do it compactly while being easy to optimize. In most applications,
+however, neural fields are treated like a black box, which precludes many signal
+manipulation tasks. In this paper, we propose a new class of neural fields called
+basis-encoded polynomial neural fields (PNFs). The key advantage of a PNF is
+that it can represent a signal as a composition of a number of manipulable and
+interpretable components without losing the merits of neural fields representation.
+We develop a general theoretical framework to analyze and design PNFs. We use
+this framework to design Fourier PNFs, which match state-of-the-art performance
+in signal representation tasks that use neural fields. In addition, we empirically
+demonstrate that Fourier PNFs enable signal manipulation applications such as
+texture transfer and scale-space interpolation. Code is available at <a href="https://
+github.com/stevenygd/PNF">https://
+github.com/stevenygd/PNF</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Video -->
+        <div>
+            <hr>
+
+            <div class='row text-center'>
+                <div class='col'>
+                    <p class='h2 mr-3'>Video</p>
+                </div>
+            </div>
+
+
+            <div class='row mt-3 text-center center-block' style=" margin-left:auto; margin-right:auto; max-width:560px">
+                <div class='col ml-1 mr-1' style="position: relative; width: 100%;height: 0;padding-bottom: 56%;">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/y6LKzQ6ACTw"
+                            title="Geometry Processing with Neural Fields" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- Architecture, explaination -->
+        <div>
+            <hr>
+            <div class='row text-center'>
+                <div class='col'>
+                    <p class='h2'>Introduction</p>
+                </div>
+            </div>
+
+            <div class='row mt-3'>
+                <div class='col-md-5 col-sm-5 col-xs-12 align-middle mt-3'>
+                    <p class="text-break">
+                        This paper advocate using neural fields for geometry processing tasks.
+                        Neural fields are neural networks that maps spatial coordinates to signals (e.g. a sign distance field).
+                        Our goal is to perform geometry processing tasks directly on neural fields without extracting meshes.
+                    </p>
+                </div>
+                <div class='col-md-7 col-sm-7 col-xs-12 mt-3'>
+                    <img src="assets/GPwithNF.png" class="img-fluid" alt="goal: GP with NF without meshing">
+                </div>
+            </div>
+
+            <div class='row mt-3'>
+                <div class='col-md-7 col-sm-7 col-xs-12 mt-3'>
+                    <img src="assets/Prior.png" class="img-fluid" alt="architecture">
+                </div>
+                <div class='col-md-5 col-sm-5 col-xs-12 align-middle mt-3'>
+                    <p class="text-break">
+                        Geometry processing is an under-constrainted problem because the user specification is usually sparse.
+                        There might exist multiple valid solution to the same input shape and user specification.
+                        As a result, we need to encode a prior to select the most reasonable outputs.
+                        In this paper, we will show how to encode <em>physics inspired priors</em> using neural fields.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results, Smoothing-->
+        <!--
+        <div>
+            <hr>
+            <div class='row text-center'>
+                <div class='col'>
+                    <p class='h2'>Smoothing and Sharpening</p>
+                </div>
+
+                <div class='row mt-3'>
+                    <div class='col-md-7 col-sm-7 col-xs-12 mt-3'>
+                        <img src="assets/SmoothAndSharpen.png" class="img-fluid" alt="architecture">
+                    </div>
+                    <div class='col-md-5 col-sm-5 col-xs-12 align-middle mt-3'>
+                        <p class="text-break">
+                            Geometry processing is an under-constrainted problem because the user specification is usually sparse.
+                            There might exist multiple valid solution to the same input shape and user specification.
+                            As a result, we need to encode a prior to select the most reasonable outputs.
+                            In this paper, we will show how to encode <em>physics inspired priors</em> using neural fields.
+                        </p>
+                    </div>
+                </div>
+
+                <div class='col'>
+                    <img src="assets/smooth-and-sharpen-results.png"
+                         class="img-fluid rounded mx-auto d-block"
+                         alt="Smoothing">
+                </div>
+
+            </div>
+            <div class='row'>
+                <div class='col'>
+                    <img src="assets/filtering.gif" class="img-fluid rounded mx-auto d-block"
+                         alt="filtering">
+                </div>
+            </div>
+        </div> -->
+
+        <div>
+            <hr>
+            <div class='row text-center'>
+                <div class='col'>
+                    <p class='h2'>Deformation</p>
+                </div>
+            </div>
+
+            <div class='row mt-3'>
+                <div class='col-md-7 col-sm-7 col-xs-12 mt-3'>
+                    <img src="assets/deformation-task.png" class="img-fluid" alt="architecture">
+                </div>
+                <div class='col-md-5 col-sm-5 col-xs-12 align-middle mt-3'>
+                    <p class="text-break">
+                        The goal of this task is to deform the input shape in a way that both fulfills user specs and resembles natural deformation.
+                        User will specify a set of points as <em>handles</em> (i.e. the blue points).
+                        The user can either move the handle or keep it unchanged.
+                        Natural deformations are those that can happen in real world objects.
+                    </p>
+                </div>
+            </div>
+
+            <div class='row mt-3'>
+                <div class='col-md-6 col-sm-6 col-xs-12 align-middle mt-3'>
+                    <p class="text-break">
+                        One type of natural deformation is elastic deformation, which assume the material has some resistence to bending and stretching.
+                        We develop training objectives to prior our model to learn elastic deformation.
+                    </p>
+                </div>
+                <div class='col-md-3 col-sm-7 col-xs-12 mt-3'>
+                    <img src="assets/stretching.png" class="img-fluid" alt="architecture">
+                </div>
+                <div class='col-md-3 col-sm-7 col-xs-12 mt-3'>
+                    <img src="assets/bending.png" class="img-fluid" alt="architecture">
+                </div>
+            </div>
+
+            <div class='row mt-3 text-center'>
+                <div class='col'>
+                    <p class="text-break">
+                        Following are the results for deformation.
+                        (A) Showing <span style="color:red">handles</span> and <span style="color:blue">targets</span> in the original shapes;
+                        (B) Using ARAP directly on mesh extracted from the input neural field using marching cube;
+                        (C) Our results.
+                    </p>
+                </div>
+            </div>
+            <div class="row mt-1">
+                <div class='col'>
+                    <img src="assets/deform-1.png" class="img-fluid rounded mx-auto d-block" alt="flow-airplane-4">
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class='col'>
+                    <img src="assets/deform-3.png" class="img-fluid rounded mx-auto d-block" alt="flow-airplane-4">
+                </div>
+            </div>
+
+            <div class='row mt-3 text-center'>
+                <div class='col'>
+                    <p class="text-break">
+                        Our model (i.e. C) can optimize for multiple handles (e.g. both hands and foot):
+                    </p>
+                </div>
+            </div>
+            <div class="row mt-1">
+                <div class='col'>
+                    <img src="assets/deform-2.png" class="img-fluid rounded mx-auto d-block" alt="flow-airplane-4">
+                </div>
+            </div>
+
+
+            <div class='row mt-3 text-center'>
+                <div class='col'>
+                    <p class="text-break">
+                        Our model (i.e. C) tends to create less volume distortion as we can see in the zoom-in region:
+                    </p>
+                </div>
+            </div>
+            <div class="row mt-1">
+                <div class='col'>
+                    <img src="assets/deform-4.png" class="img-fluid rounded mx-auto d-block" alt="flow-airplane-4">
+                </div>
+            </div>
+        </div>
+
+        <!-- Ack -->
+        <div>
+            <hr>
+
+            <div class='row mb-5 text-center'>
+                <div class='col'>
+                    <p class='h2'>Acknowledgements</p>
+                    <p>This research was supported by the Pioneer Centre for AI, DNRF grant number P1. Guandao’s PhD was supported in part by research gifts from Google, Intel, and Magic Leap. Experiments are supported in part by Google clouds platform and GPUs donated by NVIDIA.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 
+                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" 
+                integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" 
+                integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </body>
+</html>
