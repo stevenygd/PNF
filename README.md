@@ -11,7 +11,7 @@ Pytorch implementation for the **NeurIPS 2022** paper:
 [Jonathan T. Barron](https://jonbarron.info/),
 [Thomas Funkhouser](https://www.cs.princeton.edu/~funk/),
 [Bharath Hariharan](http://home.bharathh.info/),
-[Serge Belongie](https://blogs.cornell.edu/techfaculty/serge-belongie/),
+[Serge Belongie](https://blogs.cornell.edu/techfaculty/serge-belongie/)
 
 ![Teaser](docs/assets/teaser.gif)
 
