@@ -1,0 +1,81 @@
+data:
+  type: datasets.bacon_single_image_datasets
+  num_workers: 0
+  path: data/camera.jpg
+  grayscale: True
+  train:
+    length: 100
+    res: 256
+    batch_size: 1
+  val:
+    length: 1
+    batch_size: 1
+
+viz:
+  log_freq: 10
+  viz_freq: 100
+  save_freq: 10
+  val_freq: 1
+  log_zm: False
+  log_z: False
+  log_g: False
+  log_fft: True
+  log_param: True
+  save_imgs: True
+  log_hist_freq: 100
+  log_fft_freq: 1000
+  log_extrap: True
+  extrap_mult: 3
+  extrap_res: 512
+  alllvl_keys: ['all_out_lst', 'all_out']
+
+trainer:
+  type: trainers.overfit_img
+  epochs: 50
+  seed: 100
+  loss_batch: 65536
+  opt:
+    type: 'adam'
+    lr: 1e-2
+    beta1: 0.9
+    beta2: 0.999
+    momentum: 0.9  # for SGD
+    weight_decay: 0.
+    scheduler: linear
+    step_epoch: 50
+    start_ratio: 0.1
+    duration_ratio: 0.8
+
+models:
+  net:
+    type: models.sbn_2dfan
+    dim: 2              # input dim
+    out_dim: 1          # output dim
+    hid_dim: 90        # hidden dim (sqrt(BACON_hidim / (8)) for 8 subbands)
+
+    # Subband tiling (orientation)
+    # n_subbands: 4       # number of subband (or orientations)
+    # sb_agl_range: 0.25     # '0.25 * np.pi', angle within each subband
+    # sb_agl_delta: 0.25     # '0.25 * np.pi', the angle between subbands
+    n_subbands: 8
+    sb_agl_range: 1/4.
+    sb_agl_delta: 1/8.
+
+    # Subband tiling (magnitude)
+    max_bw: 256         # maximum bandwidth in unit of cycles
+    bws:
+      - [0, 1/16.]    # out: N/A
+      - [0, 1/16.]    # out: [0, 1/8]
+      - [1/16., 1/8.]  # out: [1/8, 1/4]
+      - [1/8., 1/4.]  # out: [1/4, 1/2]
+      - [1/4., 1/2.]  # out: [1/2, 1]
+
+    # Other subband information
+    quantize: True
+    out_levels: [3]
+
+    # Initialization method
+    mix_init_type: none
+    out_init_type: none
+    acc_method: sum
+    fan_uniform: False

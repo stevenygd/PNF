@@ -31,8 +31,22 @@ in signal representation tasks that use neural fields. In addition, we empirical
 demonstrate that Fourier PNFs enable signal manipulation applications such as
 texture transfer and scale-space interpolation. 
 
+## Installation 
 
-## Code will be avaiblae soon! 
+This repository provides a [Anaconda](https://www.anaconda.com/) environment, and requires NVIDIA GPU to run the
+ optimization routine. 
+The environment can be set-up using the following commands:
+```bash
+conda env create -f environment.yml
+conda activate PNF
+```
+
+## Try Fitting PNF on Camera Men!
+```bash
+python train.py configs/camera_PNF_FF.yaml
+```
+
+## More detailed code will be avaiblae soon! 
 
 ## Citation 
 
