@@ -1,6 +1,6 @@
-@inproceedings{yang2021geometry,
-  title={Geometry Processing with Neural Fields},
-  author={Yang, Guandao and Belongie, Serge and Hariharan, Bharath and Koltun, Vladlen},
-  booktitle={Thirty-Fifth Conference on Neural Information Processing Systems},
-  year={2021}
+@inproceedings{yang2022pnf,
+  title={Polynomial Neural Fields for Subband Decomposition and Manipulation},
+  author={Yang, Guandao and Benaim, Sagie and Jampani, Varun and Genova, Kyle and Barron, Jonathan and Funkhouser, Thomas and Hariharan, Bharath and Belongie, Serge},
+  booktitle={Thirty-Sixth Conference on Neural Information Processing Systems},
+  year={2022}
 }
