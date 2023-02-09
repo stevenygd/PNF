@@ -12,6 +12,7 @@ Pytorch implementation for the **NeurIPS 2022** paper:
 [Thomas Funkhouser](https://www.cs.princeton.edu/~funk/),
 [Bharath Hariharan](http://home.bharathh.info/),
 [Serge Belongie](https://blogs.cornell.edu/techfaculty/serge-belongie/)
+(* Equal contribution.)
 
 ![Teaser](docs/assets/teaser.gif)
 
@@ -45,8 +46,23 @@ conda activate PNF
 ```bash
 python train.py configs/camera_PNF_FF.yaml
 ```
+TODO: Colab! - training, visualization of the laplacian pyramid
 
-## More detailed code will be avaiblae soon! 
+## Data Preparation
+
+### TODO: DIV2K Data
+### TODO: SDF Data (Armadillo)
+### TODO: NeRF data prep (synthetic)
+
+## Pretrained Models
+
+### TODO: Pretrained model download scripts (img, sdf, and nerf)
+
+## Training
+### TODO: Bash script to train (DIV2K, SDF, and NeRF) 
+
+## Evaluation
+### TODO: bash script to test with pretrained model on these datasets
 
 ## Citation 
 
