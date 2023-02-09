@@ -57,23 +57,25 @@
                 <span class="col-md-12 col-xs-12" style="color:#007bff">*Equal contribution</span>
             </div>
 
+            <!--
 			<div class='row justify-content-center'
-                 style="position: relative; width: 100%; height:100%; padding-bottom: 30%; margin-top:32px">
+                 style="position: relative; width: 100%; height:100%; padding-bottom: 100%;">
                 <img
                     class="img-fluid rounded mx-auto d-block"
-                    src="assets/teaser.png" alt="Geometry processing with neural fields can be done with this pipeline."
+                    src="assets/teaser.gif" alt="PNF"
                     style="position:absolute; width:100%; top:0px; left:0px;"
-                    srcset="assets/teaser.png 1536w"
+                    srcset="assets/teaser.gif 1536w"
                     sizes="(min-width: 768px) 1536px, 100vw"
                 >
-			</div>
+            </div>
+            -->
         </div>
 
         <!-- Paper section -->
         <div>
             <hr>
             <div class='row'>
-                <div class='col-md-3 col-sm-3 col-xs-12 text-center col-sm-3'>
+                <div class='col-md-4 col-sm-4 col-xs-12 text-center col-sm-3'>
                     <div class="row mt-4">
                         <a href="https://openreview.net/pdf?id=juE5ErmZB61"
                            style="max-width:200px; margin-left:auto; margin-right:auto">
@@ -97,23 +99,15 @@
                         </div>
                     </div>
                 </div>
-                <div class='col-md-9 col-sm-9 col-xs-12'>
-                    <p class='h4 font-weight-bold '>Abstract</p>
-                    <p style='line-height:1.2;'>Neural fields have emerged as a new paradigm for representing signals, thanks to
-their ability to do it compactly while being easy to optimize. In most applications,
-however, neural fields are treated like a black box, which precludes many signal
-manipulation tasks. In this paper, we propose a new class of neural fields called
-basis-encoded polynomial neural fields (PNFs). The key advantage of a PNF is
-that it can represent a signal as a composition of a number of manipulable and
-interpretable components without losing the merits of neural fields representation.
-We develop a general theoretical framework to analyze and design PNFs. We use
-this framework to design Fourier PNFs, which match state-of-the-art performance
-in signal representation tasks that use neural fields. In addition, we empirically
-demonstrate that Fourier PNFs enable signal manipulation applications such as
-texture transfer and scale-space interpolation. Code is available at <a href="https://
-github.com/stevenygd/PNF">https://
-github.com/stevenygd/PNF</a>.
-                    </p>
+                <div class='col-md-8 col-sm-8 col-xs-12'>
+                    <div class="row mt-4">
+                        <!--<p class='h4 font-weight-bold '>Abstract</p>-->
+                        <p style='line-height:1.2;'>Neural fields have emerged as a new paradigm for representing signals, thanks to their ability to do it compactly while being easy to optimize. In most applications, however, neural fields are treated like a black box, which precludes many signal manipulation tasks. In this paper, we propose a new class of neural fields called basis-encoded polynomial neural fields (PNFs). The key advantage of a PNF is that it can represent a signal as a composition of a number of manipulable and interpretable components without losing the merits of neural fields representation. We develop a general theoretical framework to analyze and design PNFs. We use this framework to design Fourier PNFs, which match state-of-the-art performance in signal representation tasks that use neural fields. In addition, we empirically
+    demonstrate that Fourier PNFs enable signal manipulation applications such as texture transfer and scale-space interpolation.
+                            </a>
+                        </p>
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -124,13 +118,13 @@ github.com/stevenygd/PNF</a>.
 
             <div class='row text-center'>
                 <div class='col'>
-                    <p class='h2 mr-3'>Video</p>
+                    <p class='h2'>Video</p>
                 </div>
             </div>
 
 
-            <div class='row mt-3 text-center center-block' style=" margin-left:auto; margin-right:auto; max-width:560px">
-                <div class='col ml-1 mr-1' style="position: relative; width: 100%;height: 0;padding-bottom: 56%;">
+            <div class='row text-center center-block' style=" margin-left:auto; margin-right:auto; max-width:560px">
+                <div class='col' style="position: relative; width: 100%;height: 0;padding-bottom: 56%;">
                     <iframe width="560" height="315" src="https://www.youtube.com/embed/y6LKzQ6ACTw"
                             title="Geometry Processing with Neural Fields" frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -139,8 +133,9 @@ github.com/stevenygd/PNF</a>.
 
         </div>
 
-
         <!-- Architecture, explaination -->
+
+        <!--
         <div>
             <hr>
             <div class='row text-center'>
@@ -152,9 +147,8 @@ github.com/stevenygd/PNF</a>.
             <div class='row mt-3'>
                 <div class='col-md-5 col-sm-5 col-xs-12 align-middle mt-3'>
                     <p class="text-break">
-                        This paper advocate using neural fields for geometry processing tasks.
-                        Neural fields are neural networks that maps spatial coordinates to signals (e.g. a sign distance field).
-                        Our goal is to perform geometry processing tasks directly on neural fields without extracting meshes.
+                        Neural fields is usually treated as black-boxes.
+                        This prevents them from being used in signal analysis tasks
                     </p>
                 </div>
                 <div class='col-md-7 col-sm-7 col-xs-12 mt-3'>
@@ -176,6 +170,7 @@ github.com/stevenygd/PNF</a>.
                 </div>
             </div>
         </div>
+        -->
 
         <!-- Results, Smoothing-->
         <!--
@@ -215,6 +210,7 @@ github.com/stevenygd/PNF</a>.
             </div>
         </div> -->
 
+        <!--
         <div>
             <hr>
             <div class='row text-center'>
@@ -300,6 +296,7 @@ github.com/stevenygd/PNF</a>.
                 </div>
             </div>
         </div>
+        -->
 
         <!-- Ack -->
         <div>
