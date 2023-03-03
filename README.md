@@ -46,6 +46,7 @@ conda activate PNF
 ```bash
 python train.py configs/camera_PNF_FF.yaml
 ```
+<!--
 TODO: Colab! - training, visualization of the laplacian pyramid
 
 ## Data Preparation
@@ -63,6 +64,7 @@ TODO: Colab! - training, visualization of the laplacian pyramid
 
 ## Evaluation
 ### TODO: bash script to test with pretrained model on these datasets
+-->
 
 ## Citation 
 
