@@ -27,7 +27,8 @@ class BaseTrainer():
         if params_by_layer is None:
             params = list(self.net.parameters())
         else:
-            params = self.net.get_parameters_by_layer(params_by_layer, fix_only_output)
+            params = self.net.get_parameters_by_layer(
+                params_by_layer, fix_only_output)
 
         return sum([p.numel() for p in params]) * 1e-6
 
@@ -39,7 +40,8 @@ class BaseTrainer():
         pass
 
     def multi_gpu_wrapper(self, wrapper):
-        raise NotImplementedError("Trainer [multi_gpu_wrapper] not implemented.")
+        raise NotImplementedError(
+            "Trainer doesn't support multiGPU yet.")
 
     def _write_info_(self, info, writer, writer_step, visualize):
         # Log training information to tensorboard
@@ -56,9 +58,11 @@ class BaseTrainer():
                     img_dir = osp.join(self.cfg.save_dir, "tb_images", kn)
                     os.makedirs(img_dir, exist_ok=True)
                     bs, H, W, C = v.size(0), v.size(1), v.size(2), v.size(3)
-                    v = v.view(bs, H * W, C).transpose(1, 2).view(bs, C, H, W).contiguous()
+                    v = v.view(bs, H * W, C).transpose(1, 2).view(
+                        bs, C, H, W).contiguous()
                     vgrid = make_grid(v)
-                    save_image(vgrid, osp.join(img_dir, "%d.png" % writer_step))
+                    save_image(vgrid,
+                               osp.join(img_dir, "%d.png" % writer_step))
             elif h == 'image':
                 v = v.clamp(0, 1)
                 if visualize:
@@ -68,11 +72,14 @@ class BaseTrainer():
                     img_dir = osp.join(self.cfg.save_dir, "tb_images", kn)
                     os.makedirs(img_dir, exist_ok=True)
                     H, W, C = v.size(0), v.size(1), v.size(-1)
-                    v = v.view(H * W, C).transpose(0, 1).view(1, C, H, W).contiguous()
+                    v = v.view(H * W, C).transpose(0, 1).view(
+                        1, C, H, W).contiguous()
                     vgrid = make_grid(v)
-                    save_image(vgrid, osp.join(img_dir, "%d.png" % writer_step))
+                    save_image(vgrid,
+                               osp.join(img_dir, "%d.png" % writer_step))
             elif h == 'hist':
-                if self.ttl_iter % getattr(self.cfg.viz, "log_hist_freq", 1) == 0:
+                if self.ttl_iter % getattr(
+                    self.cfg.viz, "log_hist_freq", 1) == 0:
                     writer.add_histogram(kn, v, writer_step)
             elif h == 'loss':
                 writer.add_scalar('loss', v, writer_step)
@@ -94,9 +101,11 @@ class BaseTrainer():
         if getattr(self.cfg.viz, "log_grad", False):
             for n, p in self.net.named_parameters():
                 if p.grad is not None:
-                    writer.add_histogram("grad_hist/%s" % n, p.grad, writer_step)
+                    writer.add_histogram(
+                        "grad_hist/%s" % n, p.grad, writer_step)
                 else:
-                    writer.add_histogram("grad_hist/%s" % n, torch.zeros_like(p), writer_step)
+                    writer.add_histogram(
+                        "grad_hist/%s" % n, torch.zeros_like(p), writer_step)
 
     def validate(self, test_loader, epoch, *args, **kwargs):
         print("Trainer [validate] not implemented.")
