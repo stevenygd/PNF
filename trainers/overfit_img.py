@@ -5,9 +5,11 @@ import numpy as np
 import torch.nn.functional as F
 from trainers.base_trainer import BaseTrainer
 from trainers.utils.utils import get_opt, set_random_seed
-from trainers.utils.vis_utils import make_2d_grid, compute_psnr, compute_ssim, compute_fft
-from nerf_utils import clip_styler_utils
-from torchvision import transforms, models
+from trainers.utils.vis_utils import (make_2d_grid, compute_psnr, 
+                                      compute_ssim, compute_fft)
+from trainers.utils import clip_styler_utils
+from torchvision import models
+
 
 class Trainer(BaseTrainer):
 
@@ -31,7 +33,8 @@ class Trainer(BaseTrainer):
         if params_by_layer is None:
             params = list(self.net.parameters())
         else:
-            params = self.net.get_parameters_by_layer(params_by_layer, fix_only_output)
+            params = self.net.get_parameters_by_layer(
+                params_by_layer, fix_only_output)
 
         print("%.5fM Parameters" %
               (sum([p.numel() for p in params]) * 1e-6))
@@ -58,17 +61,20 @@ class Trainer(BaseTrainer):
 
             device = "cuda"
 
-            self.clip_model, self.preprocess = clip.load('ViT-B/32', device, jit=False)
+            self.clip_model, self.preprocess = clip.load(
+                'ViT-B/32', device, jit=False)
 
             self.VGG = models.vgg19(pretrained=True).features
             self.VGG.to(device)
 
             with torch.no_grad():
-                content_image = clip_styler_utils.load_image2(self.cfg.data.content_img,
-                                                              img_height=cfg.data.img_height,
-                                                              img_width=cfg.data.img_width).to(device)
-                self.content_features = clip_styler_utils.get_features(clip_styler_utils.img_normalize(content_image),
-                                                                       self.VGG)
+                content_image = clip_styler_utils.load_image2(
+                    self.cfg.data.content_img,
+                    img_height=cfg.data.img_height,
+                    img_width=cfg.data.img_width).to(device)
+                self.content_features = clip_styler_utils.get_features(
+                    clip_styler_utils.img_normalize(content_image),
+                    self.VGG)
 
                 template_text = clip_styler_utils.compose_text_with_templates(self.cfg.data.text_prompt)
                 tokens = clip.tokenize(template_text).to(device)
@@ -76,12 +82,14 @@ class Trainer(BaseTrainer):
                 self.text_features = self.text_features.mean(axis=0, keepdim=True)
                 self.text_features /= self.text_features.norm(dim=-1, keepdim=True)
 
-                template_source = clip_styler_utils.compose_text_with_templates("a Photo")
+                template_source = clip_styler_utils.compose_text_with_templates(
+                    "a Photo")
                 tokens_source = clip.tokenize(template_source).to(device)
                 self.text_source = self.clip_model.encode_text(tokens_source).detach()
                 self.text_source = self.text_source.mean(axis=0, keepdim=True)
                 self.text_source /= self.text_source.norm(dim=-1, keepdim=True)
-                self.source_features = self.clip_model.encode_image(clip_styler_utils.clip_normalize(content_image, device)).detach()
+                self.source_features = self.clip_model.encode_image(
+                    clip_styler_utils.clip_normalize(content_image, device)).detach()
                 self.source_features /= (self.source_features.clone().norm(dim=-1, keepdim=True))
 
     def print_params(self):
@@ -92,7 +100,8 @@ class Trainer(BaseTrainer):
         if params_by_layer is None:
             params = list(self.net.parameters())
         else:
-            params = self.net.get_parameters_by_layer(params_by_layer, fix_only_output)
+            params = self.net.get_parameters_by_layer(
+                params_by_layer, fix_only_output)
 
         return sum([p.numel() for p in params]) * 1e-6
 
@@ -120,24 +129,29 @@ class Trainer(BaseTrainer):
             target = out_b.view(res, res, cdim)
             target = target.permute(2, 0, 1).unsqueeze(dim=0)
 
-            target_features = clip_styler_utils.get_features(clip_styler_utils.img_normalize(target), self.VGG)
+            target_features = clip_styler_utils.get_features(
+                clip_styler_utils.img_normalize(target), self.VGG)
 
             content_loss = 0
 
-            content_loss += torch.mean((target_features['conv4_2'] - self.content_features['conv4_2']) ** 2)
-            content_loss += torch.mean((target_features['conv5_2'] - self.content_features['conv5_2']) ** 2)
+            content_loss += torch.mean(
+                (target_features['conv4_2'] - self.content_features['conv4_2']) ** 2)
+            content_loss += torch.mean(
+                (target_features['conv5_2'] - self.content_features['conv5_2']) ** 2)
 
             loss_patch = 0
             img_proc = []
             for n in range(self.cfg.data.num_crops):
-                target_crop = clip_styler_utils.get_cropper(self.cfg.data.crop_size)(target)
+                target_crop = clip_styler_utils.get_cropper(
+                    self.cfg.data.crop_size)(target)
                 target_crop = clip_styler_utils.get_augmenter()(target_crop)
                 img_proc.append(target_crop)
 
             img_proc = torch.cat(img_proc, dim=0)
             img_aug = img_proc
 
-            image_features = self.clip_model.encode_image(clip_styler_utils.clip_normalize(img_aug, device))
+            image_features = self.clip_model.encode_image(
+                clip_styler_utils.clip_normalize(img_aug, device))
             image_features /= (image_features.clone().norm(dim=-1, keepdim=True))
 
             img_direction = (image_features - self.source_features)
@@ -145,11 +159,13 @@ class Trainer(BaseTrainer):
 
             text_direction = (self.text_features - self.text_source).repeat(image_features.size(0), 1)
             text_direction /= text_direction.norm(dim=-1, keepdim=True)
-            loss_temp = (1 - torch.cosine_similarity(img_direction, text_direction, dim=1))
+            loss_temp = (1 - torch.cosine_similarity(
+                img_direction, text_direction, dim=1))
             loss_temp[loss_temp < self.cfg.data.thresh] = 0
             loss_patch += loss_temp.mean()
 
-            glob_features = self.clip_model.encode_image(clip_styler_utils.clip_normalize(target, device))
+            glob_features = self.clip_model.encode_image(
+                clip_styler_utils.clip_normalize(target, device))
             glob_features /= (glob_features.clone().norm(dim=-1, keepdim=True))
 
             glob_direction = (glob_features - self.source_features)
@@ -157,12 +173,13 @@ class Trainer(BaseTrainer):
 
             loss_glob = (1 - torch.cosine_similarity(glob_direction, text_direction, dim=1)).mean()
 
-            reg_tv = self.cfg.data.lambda_tv * clip_styler_utils.get_image_prior_losses(target)
+            reg_tv = (self.cfg.data.lambda_tv * 
+                      clip_styler_utils.get_image_prior_losses(target))
 
-            loss_ndf = self.cfg.data.lambda_patch * loss_patch + \
-                       self.cfg.data.lambda_c * content_loss + \
-                       reg_tv + \
-                       self.cfg.data.lambda_dir * loss_glob
+            loss_ndf = (self.cfg.data.lambda_patch * loss_patch +
+                    self.cfg.data.lambda_c * content_loss +
+                    reg_tv +
+                    self.cfg.data.lambda_dir * loss_glob)
 
         elif self.loss_type == "style_transfer":
             import torchvision.models as models

@@ -6,7 +6,11 @@ import numpy as np
 from PIL import Image
 from torch.utils import data
 from torch.utils.data import Dataset
-from datasets.single_img_datasets import init_np_seed
+
+
+def init_np_seed(worker_id):
+    seed = torch.initial_seed()
+    np.random.seed((seed * worker_id) % 4294967296)
 
 
 def crop_center(pil_img, crop_width, crop_height):

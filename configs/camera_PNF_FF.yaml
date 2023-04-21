@@ -1,5 +1,5 @@
 data:
-  type: datasets.bacon_single_image_datasets
+  type: datasets.single_image_datasets
   num_workers: 0
   path: data/camera.jpg
   grayscale: True
