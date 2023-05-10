@@ -258,7 +258,7 @@ class Trainer(BaseTrainer):
             xyz_b = xyz[i:j, :]
             val_b = value[i:j, :]
 
-            out_dict = self.net(xyz_b, None)
+            out_dict = self.net(xyz_b)
             out_lst = out_dict[self.output_key]
             curr_loss = 0.
             for level, out_b in enumerate(out_lst):
@@ -351,7 +351,7 @@ class Trainer(BaseTrainer):
         all_out_lst = {}
         for i in range(0, npts, batch_size):
             j = min(npts, i + batch_size)
-            curr_out_lst = self.net(xyz[:, i:j, :], None)[out_key]
+            curr_out_lst = self.net(xyz[:, i:j, :])[out_key]
             for k, out in enumerate(curr_out_lst):
                 if k not in all_out_lst:
                     all_out_lst[k] = []
@@ -368,7 +368,8 @@ class Trainer(BaseTrainer):
             if getattr(self.cfg.viz, "log_all_levels", True):
                 print("Log all levels at step : %d" % writer_step)
                 alllvl_res = getattr(self.cfg.viz, "alllvl_res", 512)
-                alllvl_keys = getattr(self.cfg.viz, "alllvl_keys", ['all_out_lst'])
+                alllvl_keys = getattr(
+                    self.cfg.viz, "alllvl_keys", ['all_out_lst'])
                 for alllvl_key in alllvl_keys:
                     with torch.no_grad():
                         grid = make_2d_grid(alllvl_res)
@@ -430,7 +431,7 @@ class Trainer(BaseTrainer):
             out_lst = self._net_batch_forward_(
                 xyz, self.loss_batch, self.output_key)
 
-            img_lst, psnr_lst = [], []
+            img_lst = []
             img_lst.append(gtr.reshape(1, res, res, cdim))
             for i, out in enumerate(out_lst):
                 img_lst.append(out.view(1, res, res, cdim))

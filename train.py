@@ -127,7 +127,7 @@ def main_worker(cfg, args):
             logtime_start = time.time()
             if step % int(cfg.viz.log_freq) == 0 and int(cfg.viz.log_freq) > 0:
                 print("Epoch %d Batch [%2d/%2d] Time/Iter: Train[%3.2fs] "
-                      "Update[%3.2fs] Log[%3.2fs] Load[%3.2fs] Loss %2.5f"
+                      "Update[%3.2fs] Log[%3.2fs] Load[%3.2fs] Loss %2.5e"
                       % (epoch, bidx, len(train_loader),
                          duration_meter.avg,
                          updatetime_meter.avg, logtime_meter.avg,

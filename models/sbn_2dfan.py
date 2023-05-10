@@ -310,40 +310,10 @@ class SubbandNet(nn.Module):
 
         return proportion * num_params_to_prune
 
-    # def prune_model(self, proportion, n):
-    #
-    #     from torch.nn.utils import prune
-    #
-    #     num_params_to_prune = 0
-    #     for i, sb in enumerate(self.sbs):
-    #         for module in sb.mixs:
-    #             num_params_to_prune += sum([p.numel() for p in module.parameters()]) * 1e-6
-    #             # prune.ln_structured(module, 'weight', proportion, n=float('-inf'), dim=0)
-    #             prune.ln_structured(module, 'weight', proportion, n=n, dim=0)
-    #             prune.remove(module, 'weight')
-    #
-    #             # prune.ln_structured(module, 'weight', proportion, n=float('-inf'), dim=1)
-    #             prune.ln_structured(module, 'weight', proportion, n=n, dim=1)
-    #             prune.remove(module, 'weight')
-    #
-    #         # for module in sb.outs:
-    #         #     num_params_to_prune += sum([p.numel() for p in module.parameters()]) * 1e-6
-    #         #     prune.ln_structured(module, 'weight', proportion, n=float('-inf'), dim=0)
-    #         #     prune.remove(module, 'weight')
-    #
-    #         # for module in sb.fans:
-    #         #     prune.ln_structured(module, 'weight', proportion, n=float('-inf'), dim=1)
-    #         #     prune.remove(module, 'weight')
-    #
-    #     return num_params_to_prune - (num_params_to_prune * ((1-proportion)**2))
-
-    def forward(self, x, z, fst_n=None, out_levels=None,
+    def forward(self, x, fst_n=None, out_levels=None,
                 retain_inter_grad=False):
         """
-        # TODO: progressive training
         :param x: (bs, npoints, self.dim) Input coordinate (xyz), range [-1, 1]
-        :param z: (bs, self.zdim) Shape latent code + sigma
-        TODO: will ignore [z] for now
         :return: (bs, npoints, self.dim) Gradient (self.dim dimension)
         """
         out_levels = self.out_levels if out_levels is None else out_levels
@@ -356,7 +326,8 @@ class SubbandNet(nn.Module):
         # key -> list of list, all_res[sb_i][res_i] -> tensor
         all_sb_res = {}
         for sbs_i in self.sbs:
-            sbs_out = sbs_i(x, fst_n=fst_n, retain_inter_grad=retain_inter_grad)
+            sbs_out = sbs_i(x, fst_n=fst_n,
+                            retain_inter_grad=retain_inter_grad)
             for k, lst in sbs_out.items():
                 if k not in all_sb_res:
                     all_sb_res[k] = []

@@ -1,0 +1,90 @@
+data:
+  type: datasets.single_shape_datasets
+  num_workers: 1
+  mult_scalar: 1.
+  path: data/Armadillo.ply
+  train:
+    length: 1
+    batch_size: 1
+    num_coarse_pnts: 5000
+    coarse_scale: 0.1
+    num_fine_pnts: 5000
+    fine_scale: 0.001
+    return_mesh: False
+  val:
+    length: 1
+    batch_size: 1
+    num_coarse_pnts: 5000
+    coarse_scale: 0.1
+    num_fine_pnts: 5000
+    fine_scale: 0.001
+    return_mesh: True
+    num_workers: 0
+
+val:
+  mc_res: 512
+  mc_bs: 50000
+
+viz:
+  log_freq: 10
+  viz_freq: 2000
+  save_freq: 1000
+  val_freq: 2000
+  mc_res: 256
+  mc_thr: 0.
+  mc_bound: 0.5
+  mc_bs: 50000
+
+trainer:
+  type: trainers.overfit_sdf
+  epochs: 20000
+  seed: 100
+  sdf_loss_weight: 1.
+  occ_loss_weight: 0.
+  grad_norm_weight: 0.
+  grad_norm_num_points: 0
+  coarse_loss_weight: 1e-2  # from BACON paper
+  fine_loss_weight: 1
+  mse_reduction: sum
+  clip_grad: False
+  opt:
+    type: 'adam'
+    lr: 0.01
+    beta1: 0.9
+    beta2: 0.999
+    weight_decay: 0.
+    amsgrad: True
+    # Paper learning rate
+    scheduler: bacon_log
+    # TODO: theoretically this can start anneling faster
+    step_epoch: 20000 
+    start_ratio: 1.  # 1e-2 * 1 = 1e-2
+    final_ratio: 1e-2  # 1e-2 * 1e-2 = 1e-4
+
+models:
+  net:
+    type: models.sbn_ndims
+    dim: 3              # input dim
+    out_dim: 1          # output dim
+    hid_dim: 100        # hidden dim (sqrt(BACON_hidim / (8) / 2) for 8 subbands)
+
+    # Subband tiling (magnitude)
+    max_bw: 384  # In BACON, max frequency should be the max abs of frequency
+    bw0: 1/16.
+    bws:
+      - [1/16., 0]     # out: [0, 1/8]
+      - [1/16., 1/16.] # out: [1/16, 1/4]
+      - [3/16., 1/8.]  # out: [1/8, 1/4]
+      - [3/8.,  1/4.]  # out: [1/4, 1/2]
+
+    # Other subband information
+    quantize: True
+    mix_width_init_type: none
+    mix_lower_init_type: none
+    output_init_type: none
+    acc_method: avg
+    out_levels: [3]
+    ring_type:
+      - rect
+      - trig
+    inp_mult_const: 1. # scaled to [-0.5, 0.5]

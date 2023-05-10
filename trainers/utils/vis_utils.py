@@ -447,11 +447,10 @@ def imf2mesh_multires(
         try:
             # TODO: there is a mask option which we can used to mask out regions
             #       and save compute time
-            # vert, face, _, _ = skimage.measure.marching_cubes(
-            #     field, level=threshold)
+            vert, face, _, _ = skimage.measure.marching_cubes(field, level=threshold)
             # Newer version
-            vert, face, _, _ = skimage.measure.marching_cubes_lewiner(
-                field, level=threshold)
+            # vert, face, _, _ = skimage.measure.marching_cubes_lewiner(
+                # field, level=threshold)
             # vert, face = mcubes.marching_cubes(-field, threshold)
 
             if normalize:
@@ -562,8 +561,8 @@ def make_gif(imgs_path, ext='.png'):
     out_video_name = os.path.join(imgs_path, "video.gif")
 
     video_out = imageio.get_writer(
-        out_video_name, 
-        fps=60, 
+        out_video_name,
+        fps=60,
     )
     for fname in fname_lst:
         img = np.array(PIL.Image.open(fname))
